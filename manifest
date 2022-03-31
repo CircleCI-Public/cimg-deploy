@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+repository=deploy
+parent=base
+variants=(node)
+namespace=cimg

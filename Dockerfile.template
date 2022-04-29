@@ -40,3 +40,26 @@ RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 		terraform \
 	&& \
 	sudo rm -rf /var/lib/apt/lists/*
+
+# Install AWS related tools
+RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
+		amazon-ecr-credential-helper \
+	&& \
+	sudo rm -rf /var/lib/apt/lists/* && \
+	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+	unzip awscliv2.zip && \
+	sudo ./aws/install && \
+	aws --version
+
+# Install GCP related tools
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+	curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/cloud.google.gpg && \
+	sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
+		google-cloud-cli \
+		google-cloud-cli-app-engine-go \
+		google-cloud-cli-app-engine-python \
+		google-cloud-cli-gke-gcloud-auth-plugin \
+		google-cloud-cli-kubectl-oidc \
+	&& \
+	sudo rm -rf /var/lib/apt/lists/* && \
+	gcloud --version

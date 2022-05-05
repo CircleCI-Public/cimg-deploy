@@ -14,6 +14,7 @@ RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 
 	# Setup Ansible
 	pip install ansible && \
+	pip cache purge && \
 
 	# Setup Packer & Terraform
 	curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
@@ -49,6 +50,7 @@ RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
 	unzip awscliv2.zip && \
 	sudo ./aws/install && \
+	rm -fR aws* && \
 	aws --version
 
 # Install GCP related tools

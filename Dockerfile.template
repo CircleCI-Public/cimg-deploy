@@ -14,6 +14,7 @@ RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 
 	# Setup Ansible
 	pip install ansible && \
+	pip cache purge && \
 
 	# Setup Packer & Terraform
 	curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
@@ -49,6 +50,7 @@ RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
 	unzip awscliv2.zip && \
 	sudo ./aws/install && \
+	rm -fR aws* && \
 	aws --version
 
 # Install GCP related tools
@@ -63,3 +65,17 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.
 	&& \
 	sudo rm -rf /var/lib/apt/lists/* && \
 	gcloud --version
+
+# Install Azure related tools
+RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
+		ca-certificates \
+		apt-transport-https \
+		lsb-release \
+		gnupg \
+	&& \
+	sudo rm -rf /var/lib/apt/lists/* && \
+	curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null && \
+	echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/azure-cli.list && \
+	sudo apt-get update && sudo apt-get install azure-cli && \
+	sudo rm -rf /var/lib/apt/lists/* && \
+	az --version

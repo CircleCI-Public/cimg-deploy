@@ -6,7 +6,7 @@
 # specific reason to use a different one. This means January, April, July, or 
 # October.
 # Using November release to include OpenSSL CVE fixes.
-FROM cimg/%%PARENT%%:2022.11
+FROM cimg/base:2022.11
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 

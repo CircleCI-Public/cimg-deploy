@@ -11,9 +11,11 @@
 
 `cimg/deploy` is a Docker image created by CircleCI with continuous delivery and deployment pipelines in mind.
 Each tag is a date-based snapshot of many deployment related tools such as `kubectl`, `terraform`, and much more.
-If you find this image useful but also want the AWS CLI, please check out [cimg/aws](https://github.com/CircleCI-Public/cimg-aws).
-GCP and Azure images are coming soon.
 
+If you find this image useful, but also want tools specific to your cloud provider, please see:
+- [cimg/aws](https://github.com/CircleCI-Public/cimg-aws)
+- [cimg/gcp](https://github.com/CircleCI-Public/cimg-gcp)
+- [cimg/azure](https://github.com/CircleCI-Public/cimg-azure)
 
 ## Table of Contents
 

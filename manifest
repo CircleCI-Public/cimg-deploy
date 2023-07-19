@@ -4,3 +4,4 @@ repository=deploy
 parent=base
 variants=(node)
 namespace=cimg
+arm64=1

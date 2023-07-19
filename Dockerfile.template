@@ -25,8 +25,9 @@ RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 	echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list && \
 
 	# Setup Salt
-	sudo curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest/salt-archive-keyring.gpg && \
-	echo "deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest focal main" | sudo tee /etc/apt/sources.list.d/salt.list && \
+	[[ $(uname -m) == "x86_64" ]] && ARCH="amd64" || ARCH="arm64" && \
+	sudo curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/ubuntu/20.04/${ARCH}/latest/salt-archive-keyring.gpg && \
+	echo "deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=${ARCH}] https://repo.saltproject.io/py3/ubuntu/20.04/${ARCH}/latest focal main" | sudo tee /etc/apt/sources.list.d/salt.list && \
 
 	# Setup Kubectl
 	# You must use a kubectl version that is within one minor version difference of your cluster. For example, a v1.23 client can communicate with v1.22, v1.23, and v1.24 control planes.
@@ -38,7 +39,7 @@ RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 
 	# Install Helm
 	HELM_VER=3.12.1 && \
-	curl -sSL "https://get.helm.sh/helm-v${HELM_VER}-linux-amd64.tar.gz" | sudo tar -xz --strip-components=1 -C /usr/local/bin linux-amd64/helm && \
+	curl -sSL "https://get.helm.sh/helm-v${HELM_VER}-linux-${ARCH}.tar.gz" | sudo tar -xz --strip-components=1 -C /usr/local/bin linux-${ARCH}/helm && \
 	helm version && \
 
 	# Install tools from added Apt repos

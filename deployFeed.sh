@@ -8,6 +8,7 @@ else
 fi
 
 templateFile="Dockerfile.template"
+interval="monthly"
 HELM_URL="https://api.github.com/repos/helm/helm/releases"
 
 function getHelm() {
@@ -21,9 +22,9 @@ function getHelm() {
 }
 
 function deployFeed() {
-  replaceDatedTags "$templateFile"
+  replaceDatedTags "$templateFile" "$interval"
   getHelm "$HELM_URL" "^v[0-9]+(.[0-9]+)*$"
-  [[ -n $STRING_TO_REPLACE ]] && ./shared/release "$RELEASE"
+  [[ -n $STRING_TO_REPLACE || -n $RELEASEMONTHLY ]] && ./shared/release "$RELEASEMONTHLY"
 }
 
 deployFeed "$templateFile"

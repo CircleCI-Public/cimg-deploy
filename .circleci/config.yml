@@ -154,9 +154,9 @@ jobs:
             [[ $(uname -m) == "x86_64" ]] && ARCH="amd64" || ARCH="arm64"
 
             if ! cosign version &> /dev/null; then
-              curl -O -L "$url-$ARCH" >cosign && \
-              sudo chmod 755 cosign
-              sudo cp cosign /usr/local/bin/
+              curl -O -L "$url-$ARCH" && \
+              sudo mv cosign-linux-$ARCH /usr/local/bin/cosign && \
+              sudo chmod +x /usr/local/bin/cosign
             fi
       - run:
           name: Sign, Verify, Deploy

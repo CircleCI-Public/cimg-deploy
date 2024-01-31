@@ -24,7 +24,7 @@ function getHelm() {
 function deployFeed() {
   replaceDatedTags "$templateFile" ""
   getHelm "$HELM_URL" "^v[0-9]+(.[0-9]+)*$"
-  ./shared/release "$VERSION.1"
+  ./shared/release.sh "$VERSION.1"
 }
 
 deployFeed "$templateFile"

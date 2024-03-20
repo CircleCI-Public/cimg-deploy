@@ -38,7 +38,7 @@ RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 	echo 'deb [trusted=yes] https://repo.goreleaser.com/apt/ /' | sudo tee /etc/apt/sources.list.d/goreleaser.list && \
 
 	# Install Helm
-	HELM_VER=3.14.2 && \
+	HELM_VER=3.14.3 && \
 	curl -sSL "https://get.helm.sh/helm-v${HELM_VER}-linux-${ARCH}.tar.gz" | sudo tar -xz --strip-components=1 -C /usr/local/bin linux-${ARCH}/helm && \
 	helm version && \
 

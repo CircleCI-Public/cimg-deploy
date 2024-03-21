@@ -42,6 +42,11 @@ RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 	curl -sSL "https://get.helm.sh/helm-v${HELM_VER}-linux-${ARCH}.tar.gz" | sudo tar -xz --strip-components=1 -C /usr/local/bin linux-${ARCH}/helm && \
 	helm version && \
 
+	# Install Kustomize
+	KUSTOMIZE_VER=5.1.1 && \
+	curl -sSL "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VER}/kustomize_v${KUSTOMIZE_VER}_linux_${ARCH}.tar.gz" | sudo tar -xz -C /usr/local/bin kustomize && \
+	kustomize version && \
+
 	# Install tools from added Apt repos
 	sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 		kubectl \

@@ -26,8 +26,8 @@ RUN sudo apt-get update && sudo apt-get install --yes --no-install-recommends \
 
 	# Setup Salt
 	[[ $(uname -m) == "x86_64" ]] && ARCH="amd64" || ARCH="arm64" && \
-	sudo curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/ubuntu/20.04/${ARCH}/latest/salt-archive-keyring.gpg && \
-	echo "deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=${ARCH}] https://repo.saltproject.io/py3/ubuntu/20.04/${ARCH}/latest focal main" | sudo tee /etc/apt/sources.list.d/salt.list && \
+	sudo curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/ubuntu/22.04/${ARCH}/SALT-PROJECT-GPG-PUBKEY-2023.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=${ARCH}] https://repo.saltproject.io/salt/py3/ubuntu/22.04/${ARCH}/latest jammy main" | sudo tee /etc/apt/sources.list.d/salt.list && \
 
 	# Setup Kubectl
 	# You must use a kubectl version that is within one minor version difference of your cluster. For example, a v1.23 client can communicate with v1.22, v1.23, and v1.24 control planes.

@@ -87,6 +87,7 @@ jobs:
     docker:
       - image: cimg/base:current
     steps:
+      - checkout
       - run:
           name: "Check if release build"
           command: |

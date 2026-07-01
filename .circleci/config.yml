@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  cimg: circleci/cimg@0.6.4
+  cimg: circleci/cimg@0.6.5
   slack: circleci/slack@4.12.1
 
 parameters:
@@ -14,6 +14,7 @@ workflows:
     when: << pipeline.parameters.cron >>
     jobs:
       - cimg/update:
+          resource-class: small.gen2
           update-script: deployFeed.sh
           context:
             - slack-notification-access-token
@@ -25,7 +26,7 @@ workflows:
     jobs:
       - cimg/build-and-deploy:
           name: "Test"
-          resource-class: 2xlarge+
+          resource-class: 2xlarge+.gen2
           docker-namespace: ccitest
           docker-repository: deploy
           filters:
@@ -44,7 +45,7 @@ workflows:
                 template: basic_fail_1
       - cimg/build-and-deploy:
           name: "Deploy"
-          resource-class: 2xlarge+
+          resource-class: 2xlarge+.gen2
           docker-repository: deploy
           filters:
             branches:
@@ -86,6 +87,7 @@ jobs:
         type: string
     docker:
       - image: cimg/base:current
+    resource_class: small.gen2
     steps:
       - checkout
       - run:

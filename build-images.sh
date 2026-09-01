@@ -4,5 +4,5 @@ set -eo pipefail
 
 docker context create cimg
 docker buildx create --use cimg
-docker buildx build --platform=linux/amd64,linux/arm64 --file 2026.08/Dockerfile -t cimg/deploy:2026.08.1 -t cimg/deploy:2026.08 --push .
-docker buildx build --platform=linux/amd64,linux/arm64 --file 2026.08/node/Dockerfile -t cimg/deploy:2026.08.1-node -t cimg/deploy:2026.08-node --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 2026.09/Dockerfile -t cimg/deploy:2026.09.1 -t cimg/deploy:2026.09 --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 2026.09/node/Dockerfile -t cimg/deploy:2026.09.1-node -t cimg/deploy:2026.09-node --push .
